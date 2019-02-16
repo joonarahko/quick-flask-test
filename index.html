@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Example</title>
+    </head>
+    <body>
+        <ul id="todo-list">
+            Loading...
+        </ul>
+        <button id="server-ping">
+            Say Hello To Server
+        </button>
+        <script>
+            function showTodos(todos) {
+                todoList.innerHTML = '';
+                todos.forEach((todo) => {
+                    const todoItem = document.createElement('li');
+                    todoItem.innerHTML = `Thing to do: ${todo.task}, Done: ${todo.done}`;
+                    console.log(todoList);
+                    todoList.appendChild(todoItem);
+                });
+            }
+
+            function pingServer() {
+                fetch('/api/ping', {
+                    method: ['POST'],
+                })
+            }
+
+            const todoList = document.querySelector('#todo-list');
+            const serverPingButton = document.querySelector('#server-ping');
+
+            serverPingButton.addEventListener('click', pingServer);
+
+            fetch('/api/todos').then(res => res.json()).then(showTodos);
+        </script>
+    </body>
+</html>
