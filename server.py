@@ -22,7 +22,7 @@ def todosController():
         }
     ]
 
-    res = jsonify(todos, success=True)
+    res = jsonify(todos)
     res.status_code = 200
 
     return res
