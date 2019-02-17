@@ -22,7 +22,7 @@ def todosController():
         }
     ]
 
-    res = jsonify(todos)
+    res = jsonify(todos, success=True)
     res.status_code = 200
 
     return res
@@ -33,8 +33,8 @@ def pingController():
     global PING_COUNT
     PING_COUNT += 1
     print 'Button clicked {0} times'.format(PING_COUNT)
-    resp = jsonify(success=True)
-    return resp
+    res = jsonify(success=True)
+    return res
 
 
 if __name__ == '__main__':
