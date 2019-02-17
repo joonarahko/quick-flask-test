@@ -11,7 +11,16 @@
         <button id="server-ping">
             Say Hello To Server
         </button>
+        <button id="fetch-todos">
+            Fetch todos
+        </button>
+        <div id="ping-count"></div>
         <script>
+            const todoList = document.querySelector('#todo-list');
+            const serverPingButton = document.querySelector('#server-ping');
+            const fetchTodosButton = document.querySelector('#fetch-todos');
+            const pingCountItem = document.querySelector('#ping-count');
+
             function showTodos(todos) {
                 todoList.innerHTML = '';
                 todos.forEach((todo) => {
@@ -22,18 +31,24 @@
                 });
             }
 
-            function pingServer() {
-                fetch('/api/ping', {
-                    method: 'POST',
-                })
+            function showCounter(counter) {
+               pingCountItem.innerHTML = counter.pingCount;
             }
 
-            const todoList = document.querySelector('#todo-list');
-            const serverPingButton = document.querySelector('#server-ping');
+            function pingServer() {
+              fetch('/api/ping', { method: 'POST' })
+                .then(res => res.json())
+                .then(showCounter);
+            }
+
+            function fetchTodos() {
+              fetch('/api/todos')
+                .then(res => res.json())
+                .then(showTodos);
+            }
 
             serverPingButton.addEventListener('click', pingServer);
-
-            fetch('/api/todos').then(res => res.json()).then(showTodos);
+            fetchTodosButton.addEventListener('click', fetchTodos);
         </script>
     </body>
 </html>

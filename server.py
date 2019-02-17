@@ -33,7 +33,8 @@ def pingController():
     global PING_COUNT
     PING_COUNT += 1
     print 'Button clicked {0} times'.format(PING_COUNT)
-    res = jsonify(success=True)
+    res = jsonify({ 'pingCount': PING_COUNT })
+    res.status_code = 200
     return res
 
 
